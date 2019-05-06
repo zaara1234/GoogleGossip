@@ -1,3 +1,26 @@
 .main {
-  background-color: green;
+  background-image: linear-gradient(to bottom, white, #ffdddd);
+  height: 100%;
+}
+#NewSession {
+  border-radius: 10px;
+  color: white;
+  border-color: white;
+  border-color: 654321;
+  width: 200px;
+  height: 25px;
+  background-image: #ffb200;
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#2d2f32, endColorstr=#1a1a1a);
+}
+#NewSession:hover {
+  color: white;
+  border-radius: 12px;
+  /* width: 200px;
+  height: 25px; */
+  background-image: linear-gradient(to bottom, #996633, #cc9966);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#2d2f32, endColorstr=#1a1a1a);
+}
+
+.Hidden {
+  display: none;
 }

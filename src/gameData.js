@@ -107,7 +107,7 @@ const gameData = {
     authors: "Zaara Afida, Jermain Lewis, Daril Alanis",
     description:
       "We are here to spill teas and destroy lives while exposing fake people around us.",
-    minUsers: 2,
+    minUsers: 1,
     maxUsers: 10,
     component: GoogleGossip
   }
