@@ -80,7 +80,37 @@ export default class GoogleGossip extends GameComponent {
   }
 
   submitAQuestionRender() {
-    return <div />;
+    return (
+      <div>
+        <label for="input0">Truth or Lie #0</label>
+        <br />
+        <input type="text" name="input0" id="option 1" required />
+        <br />
+
+        <label for="input1">Truth or Lie #1</label>
+        <br />
+        <input type="text" id="option 2" name="input1" required />
+        <br />
+
+        <label for="input2">Truth or Lie #2</label>
+        <br />
+        <input type="text" id="option 3" name="input2" required />
+        <br />
+
+        <label for="truthIdx">Index for Truth Statement</label>
+        <br />
+        <input
+          type="text"
+          id="option 4"
+          name="truthIdx"
+          maxlength="1"
+          required
+        />
+        <br />
+
+        <button onClick={() => this.submitClick()}>Submit</button>
+      </div>
+    );
   }
 
   render() {
