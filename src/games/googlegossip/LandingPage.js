@@ -3,7 +3,7 @@ import "./style.css";
 import Grid from "@material-ui/core/Grid";
 
 export default class LandingPage extends Component {
-  render() {
+  landingPageRender() {
     return (
       <div class="main">
         <div id="drag" />
@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
               4
             </Grid>
             <Grid item xs={4}>
-              <button id="NewSession">Join Session</button>
+              <button id="NewSession">submit tea</button>
             </Grid>
             <Grid item xs={4}>
               4
