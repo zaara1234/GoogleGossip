@@ -15,8 +15,10 @@ export default class GoogleGossip extends GameComponent {
       guess: null,
       isLandingPage: true,
       isFormPage: false,
-      isPickAnswerForm: false
+      isPickAnswerForm: false,
+      isWaitPage: false
     });
+
     this.state = {
       user_id: UserApi.getName(this.getMyUserId()),
       currentPlayer: "string",
@@ -25,15 +27,33 @@ export default class GoogleGossip extends GameComponent {
       guess: null,
       isLandingPage: true,
       isFormPage: false,
-      isPickAnswerForm: false
+      isPickAnswerForm: false,
+      isWaitPage: false
     };
   }
 
   onSessionDataChanged(data) {
-    // this.setState(data);
-    console.log("Database has updated");
-    console.log("dump of the DB");
-    console.log(data);
+    if (data.currentPlayer !== "string") {
+      if (this.state.isLandingPage) {
+        if (data.currentPlayer === this.getMyUserId()) {
+          this.setState({
+            isLandingPage: false,
+            isFormPage: true
+          });
+        } else {
+          this.setState({
+            isLandingPage: false,
+            isWaitPage: true
+          });
+        }
+      } else if (this.state.isFormPage || this.state.isWaitPage) {
+        this.setState({
+          isFormPage: false,
+          isWaitPage: false,
+          isPickAnswerForm: true
+        });
+      }
+    }
   }
 
   handleButtonClick(button_idx) {
@@ -45,9 +65,12 @@ export default class GoogleGossip extends GameComponent {
   }
 
   shouldShowCorrect() {
+    console.log("truth", this.state.truth, typeof this.state.truth);
+    console.log("guess", this.state.guess, typeof this.state.guess);
     if (this.state.guess === null) {
       return false;
     } else {
+      console.log("should show correct:", this.state.truth == this.state.guess);
       return this.state.truth === this.state.guess;
     }
   }
@@ -56,46 +79,47 @@ export default class GoogleGossip extends GameComponent {
     if (this.state.guess === null) {
       return false;
     } else {
+      console.log(
+        "should show incorrect:",
+        this.state.truth !== this.state.guess
+      );
       return this.state.truth !== this.state.guess;
     }
   }
 
   submitTea() {
     this.setState({
+      currentPlayer: this.getMyUserId(),
       isLandingPage: false,
       isFormPage: true
+    });
+
+    this.getSessionDatabaseRef().set({
+      currentPlayer: this.getMyUserId()
     });
   }
 
   landingPageRender() {
     return (
-      <div class="main">
+      <div className="main">
         <div id="drag" />
-        <Grid container spacing={12}>
-          <Grid item xs={4}>
-            4
-          </Grid>
+        <Grid container spacing={16}>
+          <Grid item xs={4} />
           <Grid item xs={4}>
             <img
               alt="teacup"
               src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
             />
           </Grid>
-          <Grid item xs={4}>
-            4
-          </Grid>
-          <Grid container spacing={12}>
-            <Grid item xs={4}>
-              4
-            </Grid>
+          <Grid item xs={4} />
+          <Grid container spacing={16}>
+            <Grid item xs={4} />
             <Grid item xs={4}>
               <button id="NewSession" onClick={() => this.submitTea()}>
                 Submit Tea
               </button>
             </Grid>
-            <Grid item xs={4}>
-              4
-            </Grid>
+            <Grid item xs={4} />
           </Grid>
         </Grid>
       </div>
@@ -131,14 +155,8 @@ export default class GoogleGossip extends GameComponent {
     // take the input from input0, input1, and input 2 --> override the "statements"
     // Take input from truthIdx --> override "truth"
     // [optional] error checking
-    this.setState({
-      currentPlayer: UserApi.getName(this.getMyUserId()),
-      isLandingPage: false,
-      isFormPage: false,
-      isPickAnswerForm: true
-    });
 
-    // this.getSessionDatabaseRef().set(this.state);
+    this.getSessionDatabaseRef().set(this.state);
   }
 
   handleFormChange(idx, event) {
@@ -150,15 +168,16 @@ export default class GoogleGossip extends GameComponent {
   }
 
   handleLieChange(event) {
+    console.log("changing lie val", event.target.value);
     this.setState({
-      truth: event.target.value
+      truth: parseInt(event.target.value, 10)
     });
   }
 
   submitAQuestionRender() {
     return (
       <form onSubmit={event => this.handleFormSubmit(event)}>
-        <label for="input0">Truth or Lie #0</label>
+        <label id="input0">Truth or Lie #0</label>
         <br />
         <input
           type="text"
@@ -168,7 +187,7 @@ export default class GoogleGossip extends GameComponent {
         />
         <br />
 
-        <label for="input1">Truth or Lie #1</label>
+        <label id="input1">Truth or Lie #1</label>
         <br />
         <input
           type="text"
@@ -178,7 +197,7 @@ export default class GoogleGossip extends GameComponent {
         />
         <br />
 
-        <label for="input2">Truth or Lie #2</label>
+        <label id="input2">Truth or Lie #2</label>
         <br />
         <input
           type="text"
@@ -188,13 +207,13 @@ export default class GoogleGossip extends GameComponent {
         />
         <br />
 
-        <label for="truthIdx">Index for Truth Statement</label>
+        <label id="truthIdx">Index for Truth Statement</label>
         <br />
         <input
           type="text"
           value={this.state.truth}
           onChange={event => this.handleLieChange(event)}
-          maxlength="1"
+          maxLength="1"
           required
         />
         <br />
@@ -202,6 +221,10 @@ export default class GoogleGossip extends GameComponent {
         <input type="submit" value="Submit" />
       </form>
     );
+  }
+
+  waitPageRender() {
+    return <div>Wait....</div>;
   }
 
   render() {
@@ -221,19 +244,8 @@ export default class GoogleGossip extends GameComponent {
       return this.submitAQuestionRender();
     } else if (this.state.isPickAnswerForm) {
       return this.pickAnAnswerRender();
+    } else if (this.state.isWaitPage) {
+      return this.waitPageRender();
     }
-
-    // if (me.includes("ZAARA")) {
-    //   return this.submitAQuestionRender();
-    // } else {
-    //   return (
-    //     <div>
-    //       <p>Session ID: {id}</p>
-    //       <p>Session creator: {creator}</p>
-    //       <p>Session users:</p>
-    //       <ul> {users} </ul>
-    //     </div>
-    //   );
-    // }
   }
 }
