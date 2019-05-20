@@ -13,8 +13,8 @@
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#2d2f32, endColorstr=#1a1a1a);
 }
 #NewSession:hover {
-  color: white;
-  border-radius: 12px;
+  color: red;
+  border-radius: 50px;
   /* width: 200px;
   height: 25px; */
   background-image: linear-gradient(to bottom, #996633, #cc9966);
