@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
               4
             </Grid>
             <Grid item xs={4}>
-              <button id="NewSession">submit tea</button>
+              <button id="NewSession">Submit tea</button>
             </Grid>
             <Grid item xs={4}>
               4

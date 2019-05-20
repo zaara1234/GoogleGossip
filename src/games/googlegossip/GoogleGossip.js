@@ -103,25 +103,18 @@ export default class GoogleGossip extends GameComponent {
     return (
       <div className="main">
         <div id="drag" />
-        <Grid container spacing={16}>
-          <Grid item xs={4} />
-          <Grid item xs={4}>
-            <img
-              alt="teacup"
-              src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
-            />
-          </Grid>
-          <Grid item xs={4} />
-          <Grid container spacing={16}>
-            <Grid item xs={4} />
-            <Grid item xs={4}>
-              <button id="NewSession" onClick={() => this.submitTea()}>
-                Submit Tea
-              </button>
-            </Grid>
-            <Grid item xs={4} />
-          </Grid>
-        </Grid>
+        <div className="teacup">
+          <img
+            alt="teacup"
+            width="400"
+            src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
+          />
+        </div>
+        <div className="button">
+          <button id="NewSession" onClick={() => this.submitTea()}>
+            Submit Tea
+          </button>
+        </div>
       </div>
     );
   }
