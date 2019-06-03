@@ -5,6 +5,8 @@ import UserApi from "../../UserApi.js";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Logo from "../../Logo.png";
+import Whisper from "../../Whisper icon.png";
 
 export default class GoogleGossip extends GameComponent {
   constructor(props) {
@@ -104,52 +106,57 @@ export default class GoogleGossip extends GameComponent {
   landingPageRender() {
     return (
       <div class="main">
-        <img src="https://photos.app.goo.gl/Vjp9ejGsMD3oiBgz5" />
-        <img
-          id="Teacup"
-          alt="teacup"
-          src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
-        />
-        <Grid container spacing={12}>
-          <Grid item xs={4} />
-          <Grid item xs={1} />
-          <Grid item xs={4} />
-          <Grid container spacing={12}>
-            <Grid item xs={5} />
-            <Grid item xs={1}>
-              <Button
-                variant="outlined"
-                id="NewSession"
-                onClick={() => this.submitTea()}
-              >
-                Submit Tea
-              </Button>
-            </Grid>
-            <Grid item xs={6} />
-          </Grid>
-        </Grid>
+        <img id="logo" src={Logo} />
+        <br />
+        <Button
+          variant="outlined"
+          color="inherit"
+          id="NewSession"
+          onClick={() => this.submitTea()}
+        >
+          Get Gossiping
+        </Button>
       </div>
     );
   }
 
   pickAnAnswerRender() {
     return (
-       d return(
-    <div> <div className="AnswerWrapper">
-          <div classNasm={thi.BshouldShowCorrect() ? "Shown" : "Hidden"}>
-          c Corrett
+      <div class="main3">
+        <div className="AnswerWrapper">
+          <div className={this.shouldShowCorrect() ? "Shown" : "Hidden"}>
+            Correct
           </div>
           <div className={this.shouldShowIncorrect() ? "Shown" : "Hidden"}>
             Incorrect
           </div>
         </div>
 
- <Buttonttonn i<Button></Button>onClick={eButtonthis.ButtonttonnClButton}>
-          {this.state.statemen/Button    Button<Button uttont<ontton>n iButtononClick={eButtonthis.ButtonttonnClButton}>
-          {this.state.statemen/Button    Button<Button</iv>Bu<ttonto></ttonto>nttonn iBeButtonnClick={() => this.ButtonttonnClButton}>
-          {this</Button>atements[2]}
-    Buttontt/onn>
-Button</div>
+        <Button
+          variant="outlined"
+          id="0"
+          onClick={() => this.handleButtonClick(0)}
+        >
+          {this.state.statements[0]}
+        </Button>
+        <br />
+        <Button
+          variant="outlined"
+          id="1"
+          onClick={() => this.handleButtonClick(1)}
+        >
+          {this.state.statements[1]}
+        </Button>
+        <br />
+        <Button
+          variant="outlined"
+          id="2"
+          onClick={() => this.handleButtonClick(2)}
+        >
+          {this.state.statements[2]}
+        </Button>
+        <br />
+      </div>
     );
   }
 
@@ -178,50 +185,58 @@ Button</div>
 
   submitAQuestionRender() {
     return (
-      <form onSubmit={event => this.handleFormSubmit(event)}>
-        <label id="input0">Truth or Lie #0</label>
-        <br />
-        <input
-          type="text"
-          value={this.state.statements[0]}
-          onChange={event => this.handleFormChange(0, event)}
-          required
-        />
-        <br />
+      <div class="main2">
+        <img id="Whisper" src={Whisper} />
+        <form onSubmit={event => this.handleFormSubmit(event)}>
+          <label id="input0">Truth or Lie #0</label>
+          <br />
+          
+          <input
+            class="flexform"
+            type="text"
+            value={this.state.statements[0]}
+            onChange={event => this.handleFormChange(0, event)}
+            required
+          />
+          <br />
 
-        <label id="input1">Truth or Lie #1</label>
-        <br />
-        <input
-          type="text"
-          value={this.state.statements[1]}
-          onChange={event => this.handleFormChange(1, event)}
-          required
-        />
-        <br />
+          <label id="input1">Truth or Lie #1</label>
+          <br />
+          <input
+            class="flexform"
+            type="text"
+            value={this.state.statements[1]}
+            onChange={event => this.handleFormChange(1, event)}
+            required
+          />
+          <br />
 
-        <label id="input2">Truth or Lie #2</label>
-        <br />
-        <input
-          type="text"
-          value={this.state.statements[2]}
-          onChange={event => this.handleFormChange(2, event)}
-          required
-        />
-        <br />
+          <label id="input2">Truth or Lie #2</label>
+          <br />
+          <input
+            class="flexform"
+            type="text"
+            value={this.state.statements[2]}
+            onChange={event => this.handleFormChange(2, event)}
+            required
+          />
+          <br />
 
-        <label id="truthIdx">Index for Truth Statement</label>
-        <br />
-        <input
-          type="text"
-          value={this.state.truth}
-          onChange={event => this.handleLieChange(event)}
-          maxLength="1"
-          required
-        />
-        <br />
+          <label id="truthIdx">Index for Truth Statement</label>
+          <br />
+          <input
+            class="flexform"
+            type="text"
+            value={this.state.truth}
+            onChange={event => this.handleLieChange(event)}
+            maxLength="1"
+            required
+          />
+          <br />
 
-        <input type="submit" value="Submit" />
-      </form>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 
@@ -247,4 +262,7 @@ Button</div>
     } else if (this.state.isPickAnswerForm) {
       return this.pickAnAnswerRender();
     } else if (this.state.isWaitPage) {
-      return this
+      return this.waitPageRender();
+    }
+  }
+}
