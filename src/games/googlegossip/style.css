@@ -6,6 +6,11 @@
   justify-content: center;
   align-items: center;
 }
+.Teacup {
+  display: flex;
+  justify-content: center;
+}
+
 #NewSession {
   border-radius: 10px;
   border-color: black;
@@ -13,8 +18,6 @@
   height: 35px;
 }
 #NewSession:hover {
-  color: red;
-  background-image: linear-gradient(to bottom, #996633, #cc9966);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#2d2f32, endColorstr=#1a1a1a);
 }
 

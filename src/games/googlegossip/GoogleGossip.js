@@ -3,6 +3,8 @@ import React from "react";
 import "./style.css";
 import UserApi from "../../UserApi.js";
 import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 
 export default class GoogleGossip extends GameComponent {
   constructor(props) {
@@ -56,12 +58,12 @@ export default class GoogleGossip extends GameComponent {
     }
   }
 
-  handleButtonClick(button_idx) {
+  handleButtonClick(Button_idx) {
     this.getSessionDatabaseRef().set({
-      guess: button_idx
+      guess: Button_idx
     });
 
-    this.setState({ guess: button_idx });
+    this.setState({ guess: Button_idx });
   }
 
   shouldShowCorrect() {
@@ -101,46 +103,53 @@ export default class GoogleGossip extends GameComponent {
 
   landingPageRender() {
     return (
-      <div className="main">
-        <div id="drag" />
-        <div className="teacup">
-          <img
-            alt="teacup"
-            width="400"
-            src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
-          />
-        </div>
-        <div className="button">
-          <button id="NewSession" onClick={() => this.submitTea()}>
-            Submit Tea
-          </button>
-        </div>
+      <div class="main">
+        <img src="https://photos.app.goo.gl/Vjp9ejGsMD3oiBgz5" />
+        <img
+          id="Teacup"
+          alt="teacup"
+          src="https://media0.giphy.com/media/8UHxg3Cn2A2kP74zrk/source.gif"
+        />
+        <Grid container spacing={12}>
+          <Grid item xs={4} />
+          <Grid item xs={1} />
+          <Grid item xs={4} />
+          <Grid container spacing={12}>
+            <Grid item xs={5} />
+            <Grid item xs={1}>
+              <Button
+                variant="outlined"
+                id="NewSession"
+                onClick={() => this.submitTea()}
+              >
+                Submit Tea
+              </Button>
+            </Grid>
+            <Grid item xs={6} />
+          </Grid>
+        </Grid>
       </div>
     );
   }
 
   pickAnAnswerRender() {
     return (
-      <div>
-        <div className="AnswerWrapper">
-          <div className={this.shouldShowCorrect() ? "Shown" : "Hidden"}>
-            Correct
+       d return(
+    <div> <div className="AnswerWrapper">
+          <div classNasm={thi.BshouldShowCorrect() ? "Shown" : "Hidden"}>
+          c Corrett
           </div>
           <div className={this.shouldShowIncorrect() ? "Shown" : "Hidden"}>
             Incorrect
           </div>
         </div>
 
-        <button id="0" onClick={() => this.handleButtonClick(0)}>
-          {this.state.statements[0]}
-        </button>
-        <button id="1" onClick={() => this.handleButtonClick(1)}>
-          {this.state.statements[1]}
-        </button>
-        <button id="2" onClick={() => this.handleButtonClick(2)}>
-          {this.state.statements[2]}
-        </button>
-      </div>
+ <Buttonttonn i<Button></Button>onClick={eButtonthis.ButtonttonnClButton}>
+          {this.state.statemen/Button    Button<Button uttont<ontton>n iButtononClick={eButtonthis.ButtonttonnClButton}>
+          {this.state.statemen/Button    Button<Button</iv>Bu<ttonto></ttonto>nttonn iBeButtonnClick={() => this.ButtonttonnClButton}>
+          {this</Button>atements[2]}
+    Buttontt/onn>
+Button</div>
     );
   }
 
@@ -238,7 +247,4 @@ export default class GoogleGossip extends GameComponent {
     } else if (this.state.isPickAnswerForm) {
       return this.pickAnAnswerRender();
     } else if (this.state.isWaitPage) {
-      return this.waitPageRender();
-    }
-  }
-}
+      return this
